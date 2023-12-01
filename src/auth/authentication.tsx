@@ -34,6 +34,9 @@ export const authOptions: AuthOptions = {
   ],
   callbacks: {
     async signIn({ user, account, profile, email, credentials }) {
+      if (Date.now() < account.expires_at) {
+        return "/api/auth/signin/azure-ad"; // redirect to login
+      }
       return true;
     },
     async session({ session, user, token }) {
