@@ -1,7 +1,7 @@
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 
-import { AuthOptions, getServerSession } from "next-auth";
+import { AuthOptions, getServerSession, TokenSet, User } from "next-auth";
 import AzureADProvider from "next-auth/providers/azure-ad";
 
 import { isLocal } from "../utils/env";
@@ -9,6 +9,7 @@ import { raise } from "../utils/ts-utils";
 
 import { fakeToken } from "./fake-token";
 import { getMembersOf } from "./ms-graph";
+import { fetch, ProxyAgent } from "undici";
 
 export const authOptions: AuthOptions = {
   providers: [
@@ -21,6 +22,14 @@ export const authOptions: AuthOptions = {
           scope: "openid profile email offline_access .default",
         },
       },
+      async profile(profile, tokens) {
+        return {
+          id: profile.sub,
+          name: profile.name,
+          email: profile.email,
+          image: null,
+        }
+      },
     }),
   ],
   callbacks: {
@@ -32,13 +41,17 @@ export const authOptions: AuthOptions = {
       return session;
     },
     async jwt({ token, user, account, profile }) {
-      if (account) {
+      if (account && user) {
         token.accessToken = account.access_token;
+        token.expires_at = account.expires_at;
+        token.refreshToken = account.refresh_token;
+      }
+      if (Date.now() < token.expires_at) {
+        token.accessToken = null;
       }
       return token;
     },
-  },
-  debug: true,
+  }
 };
 
 export async function validateToken(redirectPath: string): Promise<void> {

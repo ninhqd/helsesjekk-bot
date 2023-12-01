@@ -6,17 +6,17 @@ import { isLocal } from '../utils/env'
 import { fakeMembersOfResponse } from './fake-members-of-response'
 import { getToken } from './authentication'
 import { ProxyAgent, fetch } from 'undici'
+import { redirect } from 'next/navigation'
 
 export async function getMembersOf(): Promise<
-    MsGraphGroupsResponse | { error: string; status?: number; statusText?: string }
+MsGraphGroupsResponse | { error: string; status?: number; statusText?: string }
 > {
     if (isLocal) {
         return fakeMembersOfResponse
     }
-
+    
     const token = await getToken();
-    console.log(`token ${token}`)
-    console.log("Trying to reach https://graph.microsoft.com/v1.0/me/memberOf");
+    // TODO: fix to get scope and such. Only returns ID at the moment
     const response = await fetch('https://graph.microsoft.com/v1.0/me/memberOf', {
         dispatcher: new ProxyAgent(process.env.HTTP_PROXY),
         headers: {
@@ -25,6 +25,7 @@ export async function getMembersOf(): Promise<
     });
 
     if (!response.ok) {
+        redirect(`/api/auth/signin/azure-ad`);
         return {
             error: 'Feil fra Microsoft, prøv igjen senere.',
             status: response.status,
@@ -32,7 +33,6 @@ export async function getMembersOf(): Promise<
         }
     }
 
-    console.log("returning");
     return response.json() as Promise<MsGraphGroupsResponse>;
 }
 
