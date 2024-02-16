@@ -26,7 +26,6 @@ export async function postToTeam(
     ...createRootPostBlocks(team.name, new Date()),
     createCountMetricsContext(0, team.revealHour, team.revealDay),
   ];
-  console.log(blocks);
   const message = await client.chat.postMessage({
     channel: team.id,
     text: text,
