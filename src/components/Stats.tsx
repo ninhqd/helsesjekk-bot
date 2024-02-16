@@ -1,113 +1,116 @@
-import React, { ReactElement, Suspense } from 'react'
-import { Skeleton } from '@navikt/ds-react'
+import React, { ReactElement, Suspense } from "react";
+import { Skeleton } from "@navikt/ds-react";
 
-import { Detail, Heading, BodyShort } from 'aksel-server'
+import { Detail, Heading, BodyShort } from "aksel-server";
 import {
-    PersonTallShortIcon,
-    QuestionmarkIcon,
-    GavelIcon,
-    HouseHeartIcon,
-    HandShakeHeartIcon,
-    TenancyIcon,
-} from 'aksel-client'
+  PersonTallShortIcon,
+  QuestionmarkIcon,
+  GavelIcon,
+  HouseHeartIcon,
+  HandShakeHeartIcon,
+  TenancyIcon,
+} from "aksel-client";
 
-import { funStats } from '../db/stats'
+import { funStats } from "../db/stats";
 
 function Stats(): ReactElement {
-    return (
-        <section aria-labelledby="stats-header" className="mt-16 max-w-prose">
-            <Heading size="large" level="2">
-                Botten i NAV
-            </Heading>
-            <Detail spacing>Noen interessante tall om botten i NAV</Detail>
-            <Suspense fallback={<StatsSkeleton />}>
-                <StatsView />
-            </Suspense>
-        </section>
-    )
+  return (
+    <section aria-labelledby="stats-header" className="mt-16 max-w-prose">
+      <Heading size="large" level="2">
+        Botten i PIT
+      </Heading>
+      <Detail spacing>Noen interessante tall om botten i PIT</Detail>
+      <Suspense fallback={<StatsSkeleton />}>
+        <StatsView />
+      </Suspense>
+    </section>
+  );
 }
 
 async function StatsView(): Promise<ReactElement> {
-    //  Hack to not prerender stats on build
-    if (process.env.NAIS_DATABASE_HELSESJEKK_BOT_HELSESJEKK_BOT_URL === undefined) {
-        return <StatsSkeleton />
-    }
+  //  Hack to not prerender stats on build
+  if (
+    process.env.NAIS_DATABASE_HELSESJEKK_BOT_HELSESJEKK_BOT_URL === undefined
+  ) {
+    return <StatsSkeleton />;
+  }
 
-    const stats = await funStats()
+  const stats = await funStats();
 
-    return (
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            <div className="bg-bg-subtle rounded p-4">
-                <div className="flex gap-1 items-center">
-                    <PersonTallShortIcon aria-hidden />
-                    <Heading size="small">Aktive team</Heading>
-                </div>
-                <div className="flex gap-2">
-                    <BodyShort>{stats.activeTeams}</BodyShort>
-                </div>
-            </div>
-            <div className="bg-bg-subtle rounded p-4">
-                <div className="flex gap-1 items-center">
-                    <QuestionmarkIcon aria-hidden />
-                    <Heading size="small">Antall helsesjekker</Heading>
-                </div>
-                <div className="flex gap-2">
-                    <BodyShort>{stats.totalAsks}</BodyShort>
-                </div>
-            </div>
-            <div className="bg-bg-subtle rounded p-4">
-                <div className="flex gap-1 items-center">
-                    <GavelIcon aria-hidden />
-                    <Heading size="small">Antall svar</Heading>
-                </div>
-                <div className="flex gap-2">
-                    <BodyShort>
-                        {stats.totalAnswers} ({(stats.totalAnswers / stats.totalAsks).toFixed(1)} snitt per sjekk)
-                    </BodyShort>
-                </div>
-            </div>
-            <div className="bg-bg-subtle rounded p-4">
-                <div className="flex gap-1 items-center">
-                    <HouseHeartIcon aria-hidden />
-                    <Heading size="small">Størst team</Heading>
-                </div>
-                <div className="flex gap-2">
-                    <BodyShort>{stats.biggestTeam} medlemmer</BodyShort>
-                </div>
-            </div>
-            <div className="bg-bg-subtle rounded p-4">
-                <div className="flex gap-1 items-center">
-                    <TenancyIcon aria-hidden />
-                    <Heading size="small">Flest spørsmål i team</Heading>
-                </div>
-                <div className="flex gap-2">
-                    <BodyShort>{stats.mostQuestions} spørsmål</BodyShort>
-                </div>
-            </div>
-            <div className="bg-bg-subtle rounded p-4">
-                <div className="flex gap-1 items-center">
-                    <HandShakeHeartIcon aria-hidden />
-                    <Heading size="small">Helsesjekk Dashboard</Heading>
-                </div>
-                <div className="flex gap-2">
-                    <BodyShort>{stats.dashboardTeams} team</BodyShort>
-                </div>
-            </div>
+  return (
+    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+      <div className="bg-bg-subtle rounded p-4">
+        <div className="flex gap-1 items-center">
+          <PersonTallShortIcon aria-hidden />
+          <Heading size="small">Aktive team</Heading>
         </div>
-    )
+        <div className="flex gap-2">
+          <BodyShort>{stats.activeTeams}</BodyShort>
+        </div>
+      </div>
+      <div className="bg-bg-subtle rounded p-4">
+        <div className="flex gap-1 items-center">
+          <QuestionmarkIcon aria-hidden />
+          <Heading size="small">Antall helsesjekker</Heading>
+        </div>
+        <div className="flex gap-2">
+          <BodyShort>{stats.totalAsks}</BodyShort>
+        </div>
+      </div>
+      <div className="bg-bg-subtle rounded p-4">
+        <div className="flex gap-1 items-center">
+          <GavelIcon aria-hidden />
+          <Heading size="small">Antall svar</Heading>
+        </div>
+        <div className="flex gap-2">
+          <BodyShort>
+            {stats.totalAnswers} (
+            {(stats.totalAnswers / stats.totalAsks).toFixed(1)} snitt per sjekk)
+          </BodyShort>
+        </div>
+      </div>
+      <div className="bg-bg-subtle rounded p-4">
+        <div className="flex gap-1 items-center">
+          <HouseHeartIcon aria-hidden />
+          <Heading size="small">Størst team</Heading>
+        </div>
+        <div className="flex gap-2">
+          <BodyShort>{stats.biggestTeam} medlemmer</BodyShort>
+        </div>
+      </div>
+      <div className="bg-bg-subtle rounded p-4">
+        <div className="flex gap-1 items-center">
+          <TenancyIcon aria-hidden />
+          <Heading size="small">Flest spørsmål i team</Heading>
+        </div>
+        <div className="flex gap-2">
+          <BodyShort>{stats.mostQuestions} spørsmål</BodyShort>
+        </div>
+      </div>
+      <div className="bg-bg-subtle rounded p-4">
+        <div className="flex gap-1 items-center">
+          <HandShakeHeartIcon aria-hidden />
+          <Heading size="small">Helsesjekk Dashboard</Heading>
+        </div>
+        <div className="flex gap-2">
+          <BodyShort>{stats.dashboardTeams} team</BodyShort>
+        </div>
+      </div>
+    </div>
+  );
 }
 
 function StatsSkeleton(): ReactElement {
-    return (
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            <Skeleton variant="rounded" height="84px" />
-            <Skeleton variant="rounded" height="84px" />
-            <Skeleton variant="rounded" height="84px" />
-            <Skeleton variant="rounded" height="84px" />
-            <Skeleton variant="rounded" height="84px" />
-            <Skeleton variant="rounded" height="84px" />
-        </div>
-    )
+  return (
+    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+      <Skeleton variant="rounded" height="84px" />
+      <Skeleton variant="rounded" height="84px" />
+      <Skeleton variant="rounded" height="84px" />
+      <Skeleton variant="rounded" height="84px" />
+      <Skeleton variant="rounded" height="84px" />
+      <Skeleton variant="rounded" height="84px" />
+    </div>
+  );
 }
 
-export default Stats
+export default Stats;
