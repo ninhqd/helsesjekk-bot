@@ -30,7 +30,7 @@ function Stats(): ReactElement {
 async function StatsView(): Promise<ReactElement> {
   //  Hack to not prerender stats on build
   if (
-    process.env.NAIS_DATABASE_HELSESJEKK_BOT_HELSESJEKK_BOT_URL === undefined
+    process.env.DATABASE_URL === undefined
   ) {
     return <StatsSkeleton />;
   }
