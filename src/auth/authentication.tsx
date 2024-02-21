@@ -77,6 +77,7 @@ export async function validateToken(redirectPath: string): Promise<void> {
 export async function getToken(): Promise<string> {
   if (isLocal) return fakeToken;
   const session = await getServerSession(authOptions);
+  console.log(session.accessToken);
   return session.accessToken;
 }
 
