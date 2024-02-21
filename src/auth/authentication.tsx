@@ -19,7 +19,8 @@ export const authOptions: AuthOptions = {
       tenantId: process.env.AZURE_APP_TENANT_ID,
       authorization: {
         params: {
-          scope: "openid profile email offline_access .default",
+          scope:
+            "https://graph.microsoft.com//.default openid profile offline_access email",
         },
       },
       async profile(profile, tokens) {
@@ -28,7 +29,7 @@ export const authOptions: AuthOptions = {
           name: profile.name,
           email: profile.email,
           image: null,
-        }
+        };
       },
     }),
   ],
@@ -54,7 +55,7 @@ export const authOptions: AuthOptions = {
       }
       return token;
     },
-  }
+  },
 };
 
 export async function validateToken(redirectPath: string): Promise<void> {
