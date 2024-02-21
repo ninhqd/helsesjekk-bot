@@ -20,6 +20,8 @@ export async function getMembersOf(): Promise<
   }
 
   const token = await getToken();
+
+  console.log(token)
   // TODO: fix to get scope and such. Only returns ID at the moment
   const response = await fetch("https://graph.microsoft.com/v1.0/me/memberOf", {
     dispatcher: new ProxyAgent(process.env.HTTP_PROXY),
