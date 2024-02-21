@@ -28,7 +28,7 @@ export async function getMembersOf(): Promise<
     },
   });
 
-  console.log(response);
+  console.log(response.headers);
 
   if (!response.ok) {
     redirect(`/api/auth/signin/azure-ad`);
