@@ -27,7 +27,6 @@ export async function getMembersOf(): Promise<
       Authorization: `Bearer ${token}`,
     },
   });
-  console.log(token);
 
   if (!response.ok) {
     redirect(`/api/auth/signin/azure-ad`);
