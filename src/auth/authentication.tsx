@@ -20,7 +20,7 @@ export const authOptions: AuthOptions = {
       authorization: {
         params: {
           scope:
-            "https://graph.microsoft.com//.default openid profile offline_access email",
+            "https://graph.microsoft.com//.default openid profile offline_access email Directory.Read.All",
         },
       },
       async profile(profile, tokens) {
