@@ -5,7 +5,6 @@ import Image from "next/image";
 import { Heading, BodyLong } from "aksel-server";
 import { CopyButton, LinkIcon } from "aksel-client";
 
-import LinkButton from "../../components/core/LinkButton";
 import HowToGuide from "../../components/guide/HowToGuide";
 
 import teamsInstruks from "./teams-lag-gruppe.png";
