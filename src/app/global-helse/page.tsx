@@ -7,13 +7,15 @@ import { Heading, Skeleton } from "aksel-server";
 import BackLink from "../../components/core/BackLink";
 import { getGlobalScoreTimeline } from "../../db/score";
 import GlobalScoreGraph from "../../components/graphs/GlobalScoreGraph";
+import { validateToken } from "../../auth/authentication";
 
 export const metadata: Metadata = {
   title: "Helsesjekk | Helse i PIT",
   description: "Graf over helsen i hele PIT",
 };
 
-function Page(): ReactElement {
+async function Page(): Promise<ReactElement> {
+  await validateToken("/");
   return (
     <div>
       <BackLink href="/" />
