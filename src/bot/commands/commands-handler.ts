@@ -51,7 +51,7 @@ export function configureCommandsHandler(app: App): void {
       );
       await ack();
       await respond({
-        text: "Ser ut som du prøver å ta i bruk helsesjekk i en kanal hvor jeg ikke er lagt til. :meow-shocked: Kan du legge meg til som en integrasjon først? :smile:",
+        text: `Ser ut som du prøver å ta i bruk helsesjekk i en kanal hvor jeg ikke er lagt til. :scream_cat: Kan du legge meg til som en integrasjon først? :smile: Hvis du ikke vet hvordan sjekk ut "Kom i gang" bokmerket i #sam-helsesjekk-bot`,
       });
       return;
     }
