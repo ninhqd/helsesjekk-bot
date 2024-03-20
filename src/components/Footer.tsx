@@ -28,7 +28,7 @@ function Footer(): ReactElement {
             target="_blank"
             rel="noopener noreferrer"
           >
-            #pit-col-helsesjekk-bot
+            #sam-helsesjekk-bot
           </a>
         </BodyShort>
         <BodyShort>
