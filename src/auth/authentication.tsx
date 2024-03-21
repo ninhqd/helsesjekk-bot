@@ -1,15 +1,12 @@
-import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 
-import { AuthOptions, getServerSession, TokenSet, User } from "next-auth";
+import { AuthOptions, getServerSession } from "next-auth";
 import AzureADProvider from "next-auth/providers/azure-ad";
 
 import { isLocal } from "../utils/env";
-import { raise } from "../utils/ts-utils";
 
 import { fakeToken } from "./fake-token";
 import { getMembersOf } from "./ms-graph";
-import { fetch, ProxyAgent } from "undici";
 
 export const authOptions: AuthOptions = {
   providers: [
@@ -58,9 +55,7 @@ export const authOptions: AuthOptions = {
   },
 };
 
-export async function validateToken(redirectPath: string): Promise<void> {
-  const requestHeaders = headers();
-
+export async function validateToken(): Promise<void> {
   if (isLocal) {
     console.warn("Is running locally, skipping RSC auth");
     return;
@@ -68,7 +63,7 @@ export async function validateToken(redirectPath: string): Promise<void> {
   const session = await getServerSession(authOptions);
 
   const bearerToken: string | null | undefined = session?.accessToken;
-  console.log(requestHeaders);
+
   if (!bearerToken) {
     console.info("Found no token, redirecting to login");
     redirect(`/api/auth/signin/azure-ad`);
