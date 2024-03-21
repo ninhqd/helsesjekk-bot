@@ -7,7 +7,6 @@ import { Alert, Detail, Heading, Skeleton, BodyLong } from "aksel-server";
 import { getMembersOf, MsGraphGroup } from "../../../auth/ms-graph";
 import BackLink from "../../../components/core/BackLink";
 import SortableGroups from "../../../components/groups/SortableGroups";
-import { validateToken } from "../../../auth/authentication";
 
 export const metadata: Metadata = {
   title: "Helsesjekk | Dine grupper",
@@ -15,7 +14,6 @@ export const metadata: Metadata = {
 };
 
 async function Page(): Promise<ReactElement> {
-  await validateToken("/");
   return (
     <div>
       <BackLink href="/kom-i-gang" />

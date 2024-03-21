@@ -3,7 +3,6 @@ import { Metadata } from "next";
 
 import Stats from "../components/Stats";
 import Teams from "../components/Teams";
-import { validateToken } from "../auth/authentication";
 
 export const metadata: Metadata = {
   title: "Helsesjekk | Dine team",
@@ -11,7 +10,6 @@ export const metadata: Metadata = {
 };
 
 export default async function Page(): Promise<ReactElement> {
-  await validateToken("/");
   return (
     <div>
       <Teams />

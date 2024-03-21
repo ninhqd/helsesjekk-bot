@@ -9,7 +9,7 @@ import { BodyShort } from "aksel-server";
 
 import { Question, QuestionType } from "../../../../safe-types";
 import { getTeamByAdGroupAndTeamId } from "../../../../db";
-import { userHasAdGroup, validateToken } from "../../../../auth/authentication";
+import { userHasAdGroup } from "../../../../auth/authentication";
 import { questionTypeToText } from "../../../../utils/asked";
 import { questionsFromJsonb } from "../../../../questions/jsonb-utils";
 import {
@@ -40,7 +40,6 @@ type Props = {
 };
 
 async function Page({ params }: Props): Promise<ReactElement> {
-  await validateToken("/");
   const team = await getTeamByAdGroupAndTeamId(params.groupId, params.teamId);
   if (!team) {
     return (
