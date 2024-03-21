@@ -53,7 +53,8 @@ function HowToGuide(): ReactElement {
 
       <BodyShort spacing>
         <span className="font-bold mr-2">2a.</span>
-        {`Hvis steg 1 og 2 ikke fungerer kan du prøve å kjøre kommandoen <Code>/invite @helsesjekk</Code> i kanalen.`}
+        Hvis steg 1 og 2 ikke fungerer kan du prøve å kjøre kommandoen{" "}
+        <Code>/invite @helsesjekk</Code> i kanalen.
       </BodyShort>
 
       <BodyShort spacing>

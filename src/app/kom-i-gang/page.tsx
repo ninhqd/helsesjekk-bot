@@ -22,6 +22,7 @@ function Page(): ReactElement {
       </Heading>
       <HowToGuide />
       <GroupFinder />
+      <GroupCreator />
     </div>
   );
 }
@@ -53,9 +54,9 @@ function GroupFinder(): ReactElement {
       </BodyLong>
       <BodyLong spacing>
         Den enkleste måten er å gå til{" "}
-        <a href="/kom-i-gang/grupper">Mine grupper</a>. Søk på gruppenavnet
-        deres, kopier slack kommandoen og lim den inn i helsesjekk kanalen
-        deres.
+        <a href="/kom-i-gang/grupper">Mine grupper</a> (krever innlogging). Søk
+        på gruppenavnet deres, kopier slack kommandoen og lim den inn i
+        helsesjekk kanalen deres.
       </BodyLong>
     </div>
   );
