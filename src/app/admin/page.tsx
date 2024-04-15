@@ -17,11 +17,6 @@ import { createChannelPermalink } from "../../utils/slack";
 import AdminTeamToggler from "./_admin-team-toggler";
 
 async function Page(): Promise<ReactElement> {
-<<<<<<< Updated upstream
-  await validateToken();
-
-=======
->>>>>>> Stashed changes
   if (!(await userHasAdGroup(getAdminGroupId()))) {
     return notFound();
   }
