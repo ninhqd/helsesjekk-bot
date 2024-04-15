@@ -77,6 +77,8 @@ export async function getToken(): Promise<string> {
   console.debug("getToken");
   if (isLocal) return fakeToken;
   const session = await getServerSession(authOptions);
+  console.debug("getToken-session");
+  console.debug(session);
   return session.accessToken;
 }
 
