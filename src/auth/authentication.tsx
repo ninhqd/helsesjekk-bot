@@ -38,6 +38,8 @@ export const authOptions: AuthOptions = {
       return true;
     },
     async session({ session, user, token }) {
+      console.log(session);
+      console.log(token);
       session.accessToken = token.accessToken;
       return session;
     },
