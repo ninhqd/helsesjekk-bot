@@ -32,18 +32,19 @@ export const authOptions: AuthOptions = {
   ],
   callbacks: {
     async signIn({ user, account, profile, email, credentials }) {
+      console.debug("signIn");
       if (Date.now() < account.expires_at) {
         return "/api/auth/signin/azure-ad"; // redirect to login
       }
       return true;
     },
     async session({ session, user, token }) {
-      console.log(session);
-      console.log(token);
+      console.debug("session");
       session.accessToken = token.accessToken;
       return session;
     },
     async jwt({ token, user, account, profile }) {
+      console.debug("jwt");
       if (account && user) {
         token.accessToken = account.access_token;
         token.expires_at = account.expires_at;
@@ -73,6 +74,7 @@ export async function validateToken(): Promise<void> {
 }
 
 export async function getToken(): Promise<string> {
+  console.debug("getToken");
   if (isLocal) return fakeToken;
   const session = await getServerSession(authOptions);
   return session.accessToken;
