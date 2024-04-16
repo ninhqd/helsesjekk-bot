@@ -76,7 +76,7 @@ export async function getToken(): Promise<string> {
   if (session) {
     return session.accessToken;
   }
-  redirect(`/api/auth/signin/azure-ad`);
+  return null;
 }
 
 export async function getUser(): Promise<{
