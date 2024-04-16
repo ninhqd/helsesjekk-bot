@@ -29,9 +29,7 @@ function Stats(): ReactElement {
 
 async function StatsView(): Promise<ReactElement> {
   //  Hack to not prerender stats on build
-  if (
-    process.env.DATABASE_URL === undefined
-  ) {
+  if (process.env.DATABASE_URL === undefined) {
     return <StatsSkeleton />;
   }
 
