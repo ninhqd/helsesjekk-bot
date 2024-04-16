@@ -33,9 +33,7 @@ async function StatsView(): Promise<ReactElement> {
     return <StatsSkeleton />;
   }
 
-  console.debug("statsview");
   const stats = await funStats();
-  console.debug(stats);
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
