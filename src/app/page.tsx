@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 export default async function Page(): Promise<ReactElement> {
   return (
     <div>
-      <Teams />
+      {/* <Teams /> */}
       <Stats />
     </div>
   );
