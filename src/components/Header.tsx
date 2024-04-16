@@ -9,6 +9,7 @@ import logo from "../images/logo.png";
 import LoggedInUser, { LoggedInUserSkeleton } from "./LoggedInUser";
 
 function Header(): ReactElement {
+  console.debug("header)");
   return (
     <div>
       <header className="flex justify-between">

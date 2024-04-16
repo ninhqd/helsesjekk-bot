@@ -110,6 +110,7 @@ export async function getUsersGroups(): Promise<string[]> {
 }
 
 export function isUserLoggedIn(): boolean {
+  console.debug(isUserLoggedIn);
   try {
     getUser();
     return true;
