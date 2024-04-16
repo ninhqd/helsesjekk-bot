@@ -73,7 +73,10 @@ export async function validateToken(): Promise<void> {
 export async function getToken(): Promise<string> {
   if (isLocal) return fakeToken;
   const session = await getServerSession(authOptions);
-  return session.accessToken;
+  if (session) {
+    return session.accessToken;
+  }
+  return null;
 }
 
 export async function getUser(): Promise<{
@@ -106,9 +109,9 @@ export async function getUsersGroups(): Promise<string[]> {
   return membersOf.value.map((group) => group.id);
 }
 
-export function isUserLoggedIn(): boolean {
+export async function isUserLoggedIn(): Promise<boolean> {
   try {
-    getUser();
+    await getUser();
     return true;
   } catch (e) {
     return false;
