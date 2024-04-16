@@ -11,7 +11,8 @@ import Code from "./core/Code";
 import TeamCard from "./TeamCard";
 
 async function Teams(): Promise<ReactElement> {
-  if (!isUserLoggedIn()) {
+  const isLoggedIn = await isUserLoggedIn();
+  if (!isLoggedIn) {
     return (
       <div className="max-w-prose">
         <Heading size="large" spacing>
@@ -57,11 +58,7 @@ async function Teams(): Promise<ReactElement> {
 
 async function TeamsView(): Promise<ReactElement> {
   const userGroups = await getUsersGroups();
-  console.log("userGroups");
-  console.log(userGroups);
   const assosiatedTeam = await getTeamsByAdGroups(userGroups);
-  console.log("assosiatedTeam");
-  console.log(assosiatedTeam);
 
   if (assosiatedTeam.length === 0)
     return (
