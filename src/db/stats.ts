@@ -42,6 +42,12 @@ export async function funStats(): Promise<{
       await prisma.$queryRaw`SELECT MAX(jsonb_array_length(questions)) FROM "Team";`
     )[0]?.max,
   ]);
+  console.debug(activeTeams);
+  console.debug(totalAsks);
+  console.debug(totalAnswers);
+  console.debug(biggestTeam);
+  console.debug(dashboardTeams);
+  console.debug(mostQuestions);
 
   return {
     activeTeams: activeTeams || 0,
