@@ -29,13 +29,13 @@ function Stats(): ReactElement {
 
 async function StatsView(): Promise<ReactElement> {
   //  Hack to not prerender stats on build
-  if (
-    process.env.DATABASE_URL === undefined
-  ) {
+  if (process.env.DATABASE_URL === undefined) {
     return <StatsSkeleton />;
   }
 
+  console.debug("statsview");
   const stats = await funStats();
+  console.debug(stats);
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
