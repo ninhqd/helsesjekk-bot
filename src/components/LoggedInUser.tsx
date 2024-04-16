@@ -7,8 +7,9 @@ import { getUser, isUserLoggedIn } from "../auth/authentication";
 
 async function LoggedInUser(): Promise<ReactElement> {
   console.log("loggedInUser");
-  if (!isUserLoggedIn()) {
-    console.log("not logged in");
+  const isLoggedIn = await isUserLoggedIn();
+  console.log(isLoggedIn);
+  if (!isLoggedIn) {
     return (
       <div className="flex flex-col items-end p-4">
         <BodyShort className="w-32 text-right">Ikke logget inn</BodyShort>

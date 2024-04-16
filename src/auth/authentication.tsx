@@ -109,10 +109,10 @@ export async function getUsersGroups(): Promise<string[]> {
   return membersOf.value.map((group) => group.id);
 }
 
-export function isUserLoggedIn(): boolean {
+export async function isUserLoggedIn(): Promise<boolean> {
   console.debug("isUserLoggedIn");
   try {
-    getUser();
+    await getUser();
     console.debug("logged ");
     return true;
   } catch (e) {
