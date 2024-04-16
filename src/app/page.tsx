@@ -13,7 +13,7 @@ export default async function Page(): Promise<ReactElement> {
   return (
     <div>
       <Teams />
-      {/* <Stats /> */}
+      <Stats />
     </div>
   );
 }

@@ -6,9 +6,7 @@ import { Tooltip } from "aksel-client";
 import { getUser, isUserLoggedIn } from "../auth/authentication";
 
 async function LoggedInUser(): Promise<ReactElement> {
-  console.debug("loggedInUser");
   const isLoggedIn = await isUserLoggedIn();
-  console.debug(isLoggedIn);
   if (!isLoggedIn) {
     return (
       <div className="flex flex-col items-end p-4">
