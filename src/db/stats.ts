@@ -34,7 +34,7 @@ export async function funStats(): Promise<{
           _count: { select: { answers: true } },
         },
       })
-    )._count.answers,
+    )._count.answers || 0,
     await prisma.team.count({
       where: { active: true, assosiatedGroup: { not: null } },
     }),
@@ -42,19 +42,13 @@ export async function funStats(): Promise<{
       await prisma.$queryRaw`SELECT MAX(jsonb_array_length(questions)) FROM "Team";`
     )[0]?.max,
   ]);
-  console.debug(activeTeams);
-  console.debug(totalAsks);
-  console.debug(totalAnswers);
-  console.debug(biggestTeam);
-  console.debug(dashboardTeams);
-  console.debug(mostQuestions);
 
   return {
-    activeTeams: activeTeams || 0,
-    totalAsks: totalAsks || 0,
-    totalAnswers: totalAnswers || 0,
-    biggestTeam: biggestTeam || 0,
-    dashboardTeams: dashboardTeams || 0,
-    mostQuestions: mostQuestions || 0,
+    activeTeams,
+    totalAsks,
+    totalAnswers,
+    biggestTeam,
+    dashboardTeams,
+    mostQuestions,
   };
 }
