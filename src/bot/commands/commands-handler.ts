@@ -41,6 +41,16 @@ export function configureCommandsHandler(app: App): void {
       return;
     }
 
+    if (command.text.trim().startsWith("forceLock")) {
+      const team = await getTeam(command.channel_id);
+      if (team != null) {
+        await ack();
+        await respond({ text: "Lukker spørringen (FORCED)" });
+        await revealTeam(team, app.client);
+        return;
+      }
+    }
+
     const isBotInChannel = await isBotAddedToChannel(
       command.channel_id,
       client
